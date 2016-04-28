@@ -1,0 +1,4 @@
+setenv bootargs "console=ttyS0,115200n8"
+setenv boot_start booti 0x11000000 0x13000000 0x1000000
+if fatload usb 0:1 0x13000000 uInitrd; then if fatload usb 0:1 0x11000000 Image; then if fatload usb 0:1 0x1000000 dtb.img; then run boot_start;fi;fi;fi;
+if fatload mmc 0:1 0x13000000 uInitrd; then if fatload mmc 0:1 0x11000000 Image; then if fatload mmc 0:1 0x1000000 dtb.img; then run boot_start;fi;fi;fi;
