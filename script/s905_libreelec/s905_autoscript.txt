@@ -1,0 +1,10 @@
+setenv bootrootfs "boot=LABEL=BOOT disk=LABEL=STORAGE"
+setenv console "console=tty0"
+setenv video_output "1080p60hz"
+setenv video_mode   "hdmi"
+setenv video_bpp    "32"
+setenv libreelec "quiet"
+setenv cec "hdmitx=cecf"
+setenv bootargs "${console} ${bootrootfs} no_console_suspend hdmimode=${video_output} m_bpp=${video_bpp} vout=${video_mode} ${disableuhs} consoleblank=0 ${cec} ${hpd} ${dac} ${libreelec}"
+if fatload usb 0:1 11000000 kernel.img; then if fatload usb 0:1 0x1000000 dtb.img; then booti 0x11000000 - 0x1000000;fi;fi;
+if fatload mmc 0:1 11000000 kernel.img; then if fatload mmc 0:1 0x1000000 dtb.img; then booti 0x11000000 - 0x1000000;fi;fi;
