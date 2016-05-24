@@ -1,5 +1,5 @@
 # Amlogic_s905
-SRC for Amlogic S905 (Tronsmart Vega S95 Telos Meta Pro) etc.
+SRC for Amlogic S905 .
 
 Для сборки нужного скрипта необходимо наличие утилиты mkimage из пакета u-boot-tools.
 Устанавливаем нужный пакет :
