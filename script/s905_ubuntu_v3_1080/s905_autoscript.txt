@@ -1,0 +1,9 @@
+setenv m "1080p60hz"
+setenv mbpp "32"
+setenv hpd "true"
+setenv bootargs "root=LABEL=ROOTFS rootwait ro console=ttyS0,115200n8 console=tty0 no_console_suspend hdmimode=${m} m_bpp=${mbpp} fsck.repair=yes net.ifnames=0 elevator=noop disablehpd=${hpd}"
+setenv boot_start booti 0x11000000 0x13000000 0x1000000
+if fatload mmc 0:1 0x1000000 /DTB/${s905_dtb}.dtb; then setenv dtb_img "1"; else if fatload mmc 0:1 0x1000000 dtb.img; then setenv dtb_img "1"; else setenv dtb_img "0";fi;fi;
+if fatload mmc 0:1 0x13000000 uInitrd; then if fatload mmc 0:1 0x11000000 Image; then if test "${dtb_img}" = "1"; then run boot_start;fi;fi;fi;
+if fatload usb 0:1 0x1000000 /DTB/${s905_dtb}.dtb; then setenv dtb_img "1"; else if fatload usb 0:1 0x1000000 dtb.img; then setenv dtb_img "1"; else setenv dtb_img "0";fi;fi;
+if fatload usb 0:1 0x13000000 uInitrd; then if fatload usb 0:1 0x11000000 Image; then if test "${dtb_img}" = "1"; then run boot_start;fi;fi;fi;
