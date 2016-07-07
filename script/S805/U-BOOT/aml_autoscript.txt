@@ -1,0 +1,11 @@
+echo Start script S805 update env aml_autoscript
+setenv bootcmd "run start_autoscript;run storeboot;"
+setenv start_autoscript "if mmcinfo; then run start_mmc_autoscript;fi;if usb start; then run start_usb_autoscript;fi;"
+setenv start_mmc_autoscript "if fatload mmc 0:1 207000 s805_autoscript; then autoscr 207000; fi"
+setenv start_usb_autoscript "if fatload usb 0:1 207000 s805_autoscript; then autoscr 207000; fi"
+setenv upgrade_step "0"
+sleep 3
+saveenv
+echo END script S805 update env aml_autoscript
+sleep 5
+reboot
