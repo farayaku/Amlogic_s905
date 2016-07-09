@@ -1,5 +1,5 @@
-# Amlogic_s905
-SRC for Amlogic S905 .
+# Amlogic_s905 (Amlogic S905 \ S805)
+SRC for Amlogic S905 \ S805.
 
 Для сборки нужного скрипта необходимо наличие утилиты mkimage из пакета u-boot-tools.
 Устанавливаем нужный пакет :
