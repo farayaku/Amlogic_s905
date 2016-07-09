@@ -1,0 +1,19 @@
+setenv m "1080p"
+setenv vout_mode "hdmi"
+setenv m_bpp "32"
+setenv hpd "0"
+setenv cec "0"
+setenv disableuhs "disableuhs"
+setenv vpu "1"
+setenv hdmioutput "1"
+setenv condev "console=tty0 console=ttyS0,115200n8"
+if test "${hpd}" = "0"; then setenv hdmi_hpd "disablehpd=true"; fi
+if test "${cec}" = "1"; then setenv hdmi_cec "hdmitx=cecf"; fi
+setenv bootargs "root=LABEL=ROOTFS rootwait ro ${condev} loglevel=1  no_console_suspend vdaccfg=0xa000 logo=osd1,loaded,0x7900000,720p,full dmfc=3 cvbsmode=576cvbs hdmimode=${m} m_bpp=${m_bpp} vout=${vout_mode} ${disableuhs} ${hdmi_hpd} ${hdmi_cec} ${enabledac}"
+fatload mmc 0:1 0x21000000 uImage
+fatload mmc 0:1 0x22000000 uInitrd
+fatload mmc 0:1 0x21800000 dtb.img
+fdt addr 21800000
+if test "${vpu}" = "0"; then fdt rm /mesonstream; fdt rm /vdec; fdt rm /ppmgr; fi
+if test "${hdmioutput}" = "0"; then fdt rm /mesonfb; fi
+bootm 0x21000000 0x22000000 0x21800000
