@@ -1,3 +1,4 @@
 setenv cecconfig cecf
+setenv bootargs ${initargs} cvbsdrv=${cvbs_drv} vdaccfg=${vdac_config} logo=osd1,loaded,${fb_addr},${outputmode},full hdmimode=${hdmimode} cvbsmode=${cvbsmode} androidboot.firstboot=${firstboot} hdmitx=${cecconfig}
 if fatload usb 0 ${loadaddr} kernel.img; then bootm ${loadaddr}; fi;
 if fatload mmc 0 ${loadaddr} kernel.img; then bootm ${loadaddr}; fi;
