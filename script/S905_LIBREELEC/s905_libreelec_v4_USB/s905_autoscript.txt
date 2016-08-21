@@ -1,0 +1,6 @@
+setenv bootrootfs "boot=LABEL=BOOT disk=LABEL=DISK BOOT_IMAGE=kernel.img hdmitx=cecf"
+setenv bootargs "${bootrootfs} ${bootargs}"
+setenv usbdtb 'if fatload usb 0 ${dtb_mem_addr} dtb.img; then echo usb dtb.img loaded; else store dtb read $dtb_mem_addr; fi'
+setenv sddtb 'if fatload mmc 0 ${dtb_mem_addr} dtb.img; then echo sd dtb.img loaded; else store dtb read $dtb_mem_addr; fi'
+if fatload usb 0:1 ${loadaddr} kernel.img; then if run usbdtb; then bootm;fi;fi;
+if fatload mmc 0:1 ${loadaddr} kernel.img; then if run sddtb; then bootm;fi;fi;
