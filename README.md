@@ -3,7 +3,7 @@ SRC for Amlogic S905 \ S805 \ S802 \ S812.
 
 Скрипты, которые находяться в каталоге S805 , предназначенны для использования на платформах S802 S805 S812.
 
-Scripts that are in directory S805 intended for use on platforms S802 S805 S812.
+The scripts are in the directory S805 intended for use on platforms S802 S805 S812.
 
 Для сборки нужного скрипта необходимо наличие утилиты mkimage из пакета u-boot-tools.
 Устанавливаем нужный пакет :
