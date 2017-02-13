@@ -1,0 +1,11 @@
+setenv m "720p60hz"
+setenv m_bpp "32"
+setenv cec "hdmitx=cecf"
+setenv condev "console=tty0 console=ttyS0,115200n8 no_console_suspend hdmimode=${m} m_bpp=${m_bpp}"
+setenv bootrootfs "boot=/dev/mmcblk0p1 disk=/dev/mmcblk0p2"
+setenv bootargs "${bootrootfs} ${condev} ${cec}"
+setenv kernel  "fatload mmc 0:1 0x11000000 KERNEL"
+setenv dtb     "fatload mmc 0:1 0x1000000  kvim.dtb"
+setenv bootseq "booti 0x11000000 - 0x1000000"
+setenv bootcmd "${kernel}; ${dtb}; ${bootseq}"
+run bootcmd
