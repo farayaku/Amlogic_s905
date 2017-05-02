@@ -1,0 +1,8 @@
+setenv kernel_loadaddr "0x1080000"
+setenv condev "console=ttyAML0,115200n8 console=tty0 no_console_suspend consoleblank=0"
+setenv bootargs "root=/dev/mmcblk1p2 rootwait rootflags=data=writeback rw ${condev} no_console_suspend hdmimode=${hdmimode} m_bpp=${display_bpp} fsck.repair=yes net.ifnames=0"
+setenv boot_start bootm ${kernel_loadaddr} - ${dtb_mem_addr}
+if fatload mmc 0 ${kernel_loadaddr} uImage; then if fatload mmc 0 ${dtb_mem_addr} dtb.img; then run boot_start; else store dtb read ${dtb_mem_addr}; run boot_start;fi;fi;
+
+#setenv bootargs "root=LABEL=ROOTFS rootflags=data=writeback rw ${condev} fsck.repair=yes net.ifnames=0 mac=${mac}"
+#if fatload usb 0 ${kernel_loadaddr} uImage; then if fatload usb 0 ${dtb_mem_addr} dtb.img; then run boot_start; else store dtb read ${dtb_mem_addr}; run boot_start;fi;fi;
