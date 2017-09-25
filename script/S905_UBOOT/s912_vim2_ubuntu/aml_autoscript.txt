@@ -1,0 +1,10 @@
+setenv bootfromnand 0
+setenv storeboot "ext4load mmc 1:5 1080000 uImage; ext4load mmc 1:5 10000000 uInitrd; ext4load mmc 1:5 20000000 kvim2.dtb; bootm 1080000 10000000 20000000;"
+setenv bootcmd "run start_autoscript; run storeboot;"
+setenv start_autoscript "if usb start; then run start_usb_autoscript;fi;if mmcinfo; then run start_mmc_autoscript;fi;"
+setenv start_mmc_autoscript "if fatload mmc 0 1020000 s905_autoscript; then autoscr 1020000; fi"
+setenv start_usb_autoscript "if fatload usb 0 1020000 s905_autoscript; then autoscr 1020000; fi"
+sleep 1
+saveenv
+sleep 1
+reboot

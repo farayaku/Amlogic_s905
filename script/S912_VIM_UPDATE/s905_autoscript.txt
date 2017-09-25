@@ -1,0 +1,6 @@
+echo "Start kvim2-update bootloader !!!!"
+if test ${kvim2-update} = 1; then env default -a; setenv kvim2-update 0; saveenv; fatload mmc 0 1020000 add_multiboot; autoscr 1020000; systemoff; fi;
+if test ${kvim2-update} = 0; then sdc_update bootloader u-boot.bin; env default -a; setenv kvim2-update 1; saveenv; fatload mmc 0 1020000 add_multiboot; autoscr 1020000; reboot; fi;
+setenv kvim2-update 0
+saveenv
+reboot
