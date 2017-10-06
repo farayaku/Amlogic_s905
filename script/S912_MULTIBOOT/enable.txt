@@ -1,0 +1,8 @@
+echo "Start script enable multiboot !!!"
+setenv bootcmd "run start_autoscript; run multiboot; run storeboot;"
+setenv storeboot 'if imgread kernel ${boot_part} ${loadaddr}; then bootm ${loadaddr}; run update; fi;'
+setenv multiboot 'if test ${bls} = linux; then if ext4load mmc 1:d 1020000 emmc_autoscript; then autoscr 1020000; fi; fi; if test ${bls} = libreelec; then if ext4load mmc 1:c 1020000 emmc_autoscript; then autoscr 1020000; fi; fi;'
+setenv preboot 'get_rebootmode; if test ${reboot_mode} = ubuntu_reboot; then setenv bls linux; saveenv; fi; run bcb_cmd; run factory_reset_poweroff_protect; run upgrade_check; run init_display; run storeargs; run combine_key; run upgrade_key; run wol_init; run switch_bootmode; run boot_ini_check;'
+saveenv
+echo "Stop script enable multiboot !!!"
+sleep 1
