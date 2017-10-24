@@ -1,0 +1,7 @@
+echo "Start Linux mmc 1:5"
+setenv initargs_linux "root=/dev/linux rootflags=data=writeback rw logo=osd1,loaded,0x3d800000,1080p60hz vout=1080p60hz,enable hdmimode=1080p60hz console=ttyS0,115200n8 console=tty0 no_console_suspend consoleblank=0 fsck.repair=yes net.ifnames=0"
+setenv bootargs "${initargs_linux} ddr_size=${ddr_size}"
+ext4load mmc 1:5 11000000 /boot/zImage
+ext4load mmc 1:5 13000000 /boot/uInitrd
+ext4load mmc 1:5 1000000 /boot/dtb.img
+booti 11000000 13000000 1000000

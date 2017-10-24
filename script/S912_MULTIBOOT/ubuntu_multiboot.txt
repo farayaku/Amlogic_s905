@@ -1,0 +1,8 @@
+echo "Start Linux mmc 1:e"
+setenv condev "console=ttyS0,115200n8 console=tty0 no_console_suspend consoleblank=0"
+setenv initargs_linux "root=/dev/rootfs rootflags=data=writeback rw logo=osd1,loaded,0x3d800000,720p60hz vout=720p60hz,enable hdmimode=720p60hz ${condev} fsck.repair=yes net.ifnames=0 mac=${mac}"
+setenv bootargs "${initargs_linux} ddr_size=${ddr_size}"
+ext4load mmc 1:e 0x11000000 /boot/zImage
+ext4load mmc 1:e 0x13000000 /boot/uInitrd
+ext4load mmc 1:e 0x1000000 /boot/dtb.img
+booti 11000000 13000000 1000000
