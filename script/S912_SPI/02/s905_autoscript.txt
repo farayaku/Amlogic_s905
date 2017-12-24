@@ -1,0 +1,4 @@
+echo "Start update u-boot ENV to SPI !!!!"
+defenv
+saveenv
+systemoff

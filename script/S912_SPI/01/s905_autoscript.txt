@@ -1,0 +1,2 @@
+echo "Start update u-boot to SPI !!!!"
+if fatload mmc 0 12000000 u-boot.bin.spi; then sf probe; sf erase 0 200000; sf write 12000000 0 200000; kbi bootmode w spi; systemoff; fi;
