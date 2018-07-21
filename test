@@ -1,0 +1,7 @@
+echo Start script update env aml_autoscript
+update bulkcmd setenv -f
+EnableSelinux permissive
+update bulkcmd saveenv
+saveenv
+echo END script update env aml_autoscript
+reboot
